@@ -1,0 +1,28 @@
+<project name="uba" default="compile" basedir=".">
+    <description>
+        Builds the uba generator project
+    </description>
+  
+  <target name="init">
+    <!-- set global properties for this build -->
+    <property name="src.dir" location="${basedir}/src"/>
+    <property name="class.dir" location="${basedir}/classes"/>
+  </target>
+
+  <target name="mkdirs" depends="init" description="create dirs">
+    <!-- Create the build directory structure used by compile -->
+    <mkdir dir="${class.dir}"/>
+  </target>
+  
+  <target name="compile" depends="mkdirs" description="compile the source ">
+    <!-- Compile the java code from ${src} into ${build} -->
+    <javac source="1.5" target="1.5" srcdir="${src.dir}" destdir="${class.dir}">
+    	<compilerarg value="-Xlint:unchecked"/>
+    </javac>
+  </target>
+
+  <target name="clean" depends="init" description="clean up">
+    <!-- Delete the ${build} and ${dist} directory trees -->
+    <delete dir="${class.dir}"/>
+  </target>
+</project>
