@@ -332,7 +332,7 @@ public class Generator {
     /** name */
     public String name;
     /** list of authors */
-    public ArrayList authors;
+    public ArrayList<String> authors;
   }
 
   /** univ-bench ontology url */
@@ -352,15 +352,15 @@ public class Generator {
   /** user specified seed for the data generation */
   private long baseSeed_ = 0l;
   /** list of undergraduate courses generated so far (in the current department) */
-  private ArrayList underCourses_;
+  private ArrayList<CourseInfo> underCourses_;
   /** list of graduate courses generated so far (in the current department) */
-  private ArrayList gradCourses_;
+  private ArrayList<CourseInfo> gradCourses_;
   /** list of remaining available undergraduate courses (in the current department) */
-  private ArrayList remainingUnderCourses_;
+  private ArrayList<Integer> remainingUnderCourses_;
   /** list of remaining available graduate courses (in the current department) */
-  private ArrayList remainingGradCourses_;
+  private ArrayList<Integer> remainingGradCourses_;
   /** list of publication instances generated so far (in the current department) */
-  private ArrayList publications_;
+  private ArrayList<PublicationInfo> publications_;
   /** index of the full professor who has been chosen as the department chair */
   private int chair_;
   /** starting index of the universities */
@@ -464,11 +464,11 @@ public class Generator {
     }
 
     random_ = new Random();
-    underCourses_ = new ArrayList();
-    gradCourses_ = new ArrayList();
-    remainingUnderCourses_ = new ArrayList();
-    remainingGradCourses_ = new ArrayList();
-    publications_ = new ArrayList();
+    underCourses_ = new ArrayList<CourseInfo>();
+    gradCourses_ = new ArrayList<CourseInfo>();
+    remainingUnderCourses_ = new ArrayList<Integer>();
+    remainingGradCourses_ = new ArrayList<Integer>();
+    publications_ = new ArrayList<PublicationInfo>();
   }
 
   /**
@@ -606,7 +606,7 @@ public class Generator {
     System.out.println("Started...");
     try {
       log_ = new PrintStream(new FileOutputStream(System.getProperty("user.dir") +
-                                                 "\\" + LOG_FILE));
+                                                 System.getProperty("file.separator") + LOG_FILE));
       writer_.start();
       for (int i = 0; i < instances_[CS_C_UNIV].num; i++) {
         _generateUniv(i + startIndex_);
@@ -645,7 +645,7 @@ public class Generator {
    * NOTE: Use univIndex instead of instances[CS_C_UNIV].count till generateASection(CS_C_UNIV, ) is invoked.
    */
   private void _generateDept(int univIndex, int index) {
-    String fileName = System.getProperty("user.dir") + "\\" +
+    String fileName = System.getProperty("user.dir") + System.getProperty("file.separator") +
         _getName(CS_C_UNIV, univIndex) + INDEX_DELIMITER + index + _getFileSuffix();
     writer_.startFile(fileName);
 
@@ -960,7 +960,7 @@ public class Generator {
       publication = new PublicationInfo();
       publication.id = _getId(CS_C_PUBLICATION, i, author);
       publication.name = _getRelativeName(CS_C_PUBLICATION, i);
-      publication.authors = new ArrayList();
+      publication.authors = new ArrayList<String>();
       publication.authors.add(author);
       publications_.add(publication);
     }
@@ -1360,8 +1360,8 @@ public class Generator {
    * @return So generated list of integers.
    */
   private ArrayList _getRandomList(int num, int min, int max) {
-    ArrayList list = new ArrayList();
-    ArrayList tmp = new ArrayList();
+    ArrayList<Integer> list = new ArrayList<Integer>();
+    ArrayList<Integer> tmp = new ArrayList<Integer>();
     for (int i = min; i <= max; i++) {
       tmp.add(new Integer(i));
     }
