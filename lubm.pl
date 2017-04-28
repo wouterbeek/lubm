@@ -86,7 +86,7 @@ reserialize0(DirtyFile1, CleanFile) :-
     rdf_reserialize(BaseUri, In, CleanFile),
     close(In)
   ),
-  %delete_file(DirtyFile2),
+  delete_file(DirtyFile2),
   writeln(CleanFile).
 
 
