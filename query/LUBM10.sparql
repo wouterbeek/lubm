@@ -1,0 +1,13 @@
+# LUBM10
+#
+# This query differs from queries LUBM6, LUBM7, LUBM8 and LUBM9 in
+# that it only requires the (implicit) `subClassOf' relationship
+# between `GraduateStudent' and `Student', i.e., `subClassOf'
+# relationship between `UndergraduateStudent' and `Student' does not
+# add to the results.
+
+prefix ub: <http://www.lehigh.edu/~zhp2/2004/0401/univ-bench.owl#>
+select ?x {
+  ?x a ub:Student ;
+    ub:takesCourse <http://www.Department0.University0.edu/GraduateCourse0>
+}

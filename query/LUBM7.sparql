@@ -1,0 +1,13 @@
+# LUBM7
+#
+# This query is similar to query LUBM6 in terms of class `Student' but
+# it increases in the number of classes and properties and its
+# selectivity is high.
+
+prefix ub: <http://www.lehigh.edu/~zhp2/2004/0401/univ-bench.owl#>
+select ?x ?y {
+  ?x a ub:Student ;
+    ub:takesCourse ?y .
+  ?y a ub:Course .
+  <http://www.Department0.University0.edu/AssociateProfessor0> ub:teacherOf ?y
+}

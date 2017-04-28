@@ -1,0 +1,16 @@
+# LUBM12
+#
+# The benchmark data do not produce any instances of class `Chair'.
+# Instead, each `Department' individual is linked to the chair
+# professor of that department by property `headOf'.  Hence this query
+# requires realization, i.e., inference that that professor is an
+# instance of class `Chair' because he or she is the head of a
+# department.  Input of this query is small as well.
+
+prefix ub: <http://www.lehigh.edu/~zhp2/2004/0401/univ-bench.owl#>
+select ?x ?y {
+  ?x a ub:Chair ;
+    ub:worksFor ?y .
+  ?y a ub:Department ;
+    ub:subOrganizationOf <http://www.University0.edu>
+}

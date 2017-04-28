@@ -1,0 +1,16 @@
+# LUBM9
+#
+# Besides the aforementioned features of class `Student' and the wide
+# hierarchy of class `Faculty', like query LUBM2, this query is
+# characterized by the most classes and properties in the query set
+# and there is a triangular pattern of relationships.
+
+prefix ub: <http://www.lehigh.edu/~zhp2/2004/0401/univ-bench.owl#>
+select ?x ?y ?z {
+  ?x a ub:Student ;
+    ub:advisor ?y ;
+    ub:takesCourse ?z .
+  ?y a ub:Faculty ;
+    ub:teacherOf ?z .
+  ?z a ub:Course
+}

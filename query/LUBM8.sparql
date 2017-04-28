@@ -1,0 +1,13 @@
+# LUBM8
+#
+# This query is further more complex than query LUBM7 by including one
+# more property.
+
+prefix ub: <http://www.lehigh.edu/~zhp2/2004/0401/univ-bench.owl#>
+select ?x ?y ?z {
+  ?x a ub:Student ;
+    ub:memberOf ?y ;
+    ub:emailAddress ?z .
+  ?y a ub:Department ;
+    ub:subOrganizationOf <http://www.University0.edu>
+}

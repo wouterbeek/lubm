@@ -1,0 +1,17 @@
+# LUBM11
+#
+# Queries LUBM11, LUBM12 and LUBM13 are intended to verify the
+# presence of certain OWL reasoning capabilities in the system.  In
+# this query, property `subOrganizationOf' is defined as transitive.
+# Since in the benchmark data, instances of `ResearchGroup' are stated
+# as a sub-organization of a `Department' individual and the later
+# sub-organization of a `University' individual, inference about the
+# `subOrganizationOf' relationship between instances of
+# `ResearchGroup' and `University' is required to answer this query.
+# Additionally, its input is small.
+
+prefix ub: <http://www.lehigh.edu/~zhp2/2004/0401/univ-bench.owl#>
+select ?x {
+  ?x a ub:ResearchGroup ;
+    ub:subOrganizationOf <http://www.University0.edu>
+}

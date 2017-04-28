@@ -1,0 +1,15 @@
+# LUBM4
+#
+# This query has small input and high selectivity.  It assumes
+# `subClassOf' relationship between `Professor' and its subclasses.
+# Class `Professor' has a wide hierarchy.  Another feature is that it
+# queries about multiple properties of a single class.
+
+prefix ub: <http://www.lehigh.edu/~zhp2/2004/0401/univ-bench.owl#>
+select ?x ?y1 ?y2 ?y3 {
+  ?x a ub:Professor ;
+    ub:worksFor <http://www.Department0.University0.edu> ;
+    ub:name ?y1 ;
+    ub:emailAddress ?y2 ;
+    ub:telephone ?y3
+}
