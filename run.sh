@@ -1,6 +1,8 @@
+#!/bin/bash
 java \
     -cp classes/ \
     edu.lehigh.swat.bench.uba.Generator \
-    -index 0 \
-    -onto univ-bench.owl \
-    -seed 0
+    -index "$1" \
+    -onto "$2" \
+    -seed "$3" \
+    -univ "$4"
