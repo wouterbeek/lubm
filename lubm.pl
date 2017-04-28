@@ -53,7 +53,7 @@ websql:dataset_file("LUBM", NumUniversities, HdtFile) :-
       )
   ->  true
   ;   absolute_file_name(lubm('run.sh'), Program, [access(execute)]),
-      absolute_file_name(lubm('x.owl'), Ontology, [access(read)]),
+      absolute_file_name(lubm('univ-bench.owl'), Ontology, [access(read)]),
       process_create(Program, [0,Ontology,0,NumUniversities], []),
       absolute_file_name(lubm(.), Dir, [access(read),file_type(directory)]),
       directory_file_path(Dir, '*.owl', Spec),
