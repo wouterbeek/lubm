@@ -37,11 +37,26 @@
     websql:query_size/4,
     websql:query_string/3.
 
+% Q2 %
 
+websql:query_html_description("LUBM", "Q2") -->
+  html(p("This query increases in complexity: 3 classes and 3 properties are involved.  Additionally, there is a triangular pattern of relationships between the objects involved.")).
+         
+websql:query_string("LUBM", "Q2", '\c
+prefix ub: <http://www.lehigh.edu/~zhp2/2004/0401/univ-bench.owl#>
+select ?x ?y ?z {
+  ?x a ub:GraduateStudent ;
+    ub:undergraduateDegreeFrom ?y ;
+    ub:memberOf ?z .
+  ?y a ub:University .
+  ?z a ub:Department ;
+    ub:subOrganizationOf ?y
+}').
 
 
 
 % LUBM %
+% Q3 %
 
 websql:dataset_file("LUBM", NumUniversities, HdtFile) :-
   atomic_list_concat(['LUBM',NumUniversities], -, Base),
@@ -72,6 +87,13 @@ websql:dataset_file("LUBM", NumUniversities, HdtFile) :-
       concatenate_files(CleanFiles, CleanFile),
       maplist(delete_file, CleanFiles),
       finish_ntriples_file(CleanFile, HdtFile, _)
+websql:query_html_description("LUBM", "Q3") -->
+  html(
+    p([
+      "This query is similar to query LUBM1 but class ",
+      code("Publication"),
+      " has a wide hierarchy."
+    ])
   ).
 
 reserialize0(DirtyFile1, CleanFile) :-
@@ -106,10 +128,13 @@ websql:query_size("SP²B", "Q1",  5000000, 1).
 websql:query_size("SP²B", "Q1", 25000000, 1).
 
 websql:query_string("LUBM", "Q1", '\c
+websql:query_string("LUBM", "Q3", '\c
 prefix ub: <http://www.lehigh.edu/~zhp2/2004/0401/univ-bench.owl#>
 select ?x {
   ?x a ub:GraduateStudent ;
     ub:takesCourse <http://www.Department0.University0.edu/GraduateCourse0>
+  ?x a ub:Publication ;
+    ub:publicationAuthor <http://www.Department0.University0.edu/AssistantProfessor0>
 }').
 
 
