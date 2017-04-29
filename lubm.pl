@@ -46,7 +46,7 @@ websql:dataset_file("LUBM", NumUniversities, HdtFile) :-
         [access(read),file_errors(fail)]
       )
   ->  true
-  ;   absolute_file_name(lubm(.), Dir, [access(read),file_type(directory)]),
+  ;   absolute_file_name(lubm(.), Dir, [access(write),file_type(directory)]),
       directory_file_path(Dir, 'run.sh', Program),
       OntologyUri = 'http://www.lehigh.edu/~zhp2/2004/0401/univ-bench.owl',
       process_create(Program, [0,OntologyUri,0,NumUniversities], [cwd(Dir)]),
@@ -81,8 +81,6 @@ reserialize0(DirtyFile1, CleanFile) :-
   ),
   delete_file(DirtyFile2),
   writeln(CleanFile).
-
-
 
 
 
