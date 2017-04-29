@@ -136,6 +136,3 @@ select ?x {
   ?x a ub:Publication ;
     ub:publicationAuthor <http://www.Department0.University0.edu/AssistantProfessor0>
 }').
-
-
-
