@@ -10,7 +10,7 @@
 :- use_module(library(file_ext)).
 :- use_module(library(http/html_write)).
 :- use_module(library(lists)).
-:- use_module(library(process)).
+:- use_module(library(os_ext)).
 :- use_module(library(semweb/rdf_ext)).
 :- use_module(library(uri)).
 
@@ -46,10 +46,20 @@ websql:dataset_file("LUBM", NumUniversities, HdtFile) :-
         [access(read),file_errors(fail)]
       )
   ->  true
-  ;   absolute_file_name(lubm(.), Dir, [access(write),file_type(directory)]),
-      directory_file_path(Dir, 'run.sh', Program),
+  ;   absolute_file_name(lubm('build/lubm.jar'), Jar, [access(read)]),
+      absolute_file_name(data(.), Dir, [access(write),file_type(directory)]),
       OntologyUri = 'http://www.lehigh.edu/~zhp2/2004/0401/univ-bench.owl',
-      process_create(Program, [0,OntologyUri,0,NumUniversities], [cwd(Dir)]),
+      run_jar(
+        Jar,
+        [
+          '-index', 0,
+          '-onto', OntologyUri,
+          '-seed', 0,
+          '-univ', NumUniversities
+        ],
+        [Out]>>copy_stream_data(Out, user_output),
+        [cwd(Dir)]
+      ),
       directory_file_path(Dir, 'University*.owl', Spec),
       expand_file_name(Spec, DirtyFiles),
       findall(
@@ -63,24 +73,21 @@ websql:dataset_file("LUBM", NumUniversities, HdtFile) :-
       file_name_extension(Base, nt, CleanLocal),
       absolute_file_name(data(CleanLocal), CleanFile, [access(write)]),
       concatenate_files(CleanFiles, CleanFile),
-      maplist(delete_file, CleanFiles),
+      directory_file_path(Dir, 'log.txt', LogFile),
+      maplist(delete_file, [LogFile|CleanFiles]),
       finish_ntriples_file(CleanFile, HdtFile, _)
   ).
 
-reserialize0(DirtyFile1, CleanFile) :-
-  file_base_name(DirtyFile1, DirtyLocal),
-  absolute_file_name(data(DirtyLocal), DirtyFile2, [access(write)]),
-  rename_file(DirtyFile1, DirtyFile2),
-  file_name_extension(Base, _, DirtyFile2),
+reserialize0(DirtyFile, CleanFile) :-
+  file_name_extension(Base, _, DirtyFile),
   file_name_extension(Base, nt, CleanFile),
-  uri_file_name(BaseUri, DirtyFile2),
+  uri_file_name(BaseUri, DirtyFile),
   setup_call_cleanup(
-    open(DirtyFile2, read, In),
+    open(DirtyFile, read, In),
     rdf_reserialize(BaseUri, In, CleanFile),
     close(In)
   ),
-  delete_file(DirtyFile2),
-  writeln(CleanFile).
+  delete_file(DirtyFile).
 
 
 
