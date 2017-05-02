@@ -1,5 +1,5 @@
 <?xml version="1.1" encoding="UTF-8" standalone="yes"?>
-<project name="uba" default="compile" basedir=".">
+<project name="uba" default="jar" basedir=".">
   <description>
     Builds the UBA generator of the LUBM project.
   </description>
@@ -30,7 +30,7 @@
     <delete dir="${build.dir}"/>
   </target>
 
-  <target name="jar" depends="mkdirs" description="Create JAR.">
+  <target name="jar" depends="compile" description="Create JAR.">
     <jar destfile="${build.dir}/lubm.jar">
       <fileset dir="${class.dir}"/>
       <manifest>

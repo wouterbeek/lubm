@@ -3,7 +3,7 @@
 /** <module> LUBM
 
 @author Wouter Beek
-@version 2017/04
+@version 2017/04-2017/05
 */
 
 :- use_module(library(apply)).
@@ -15,29 +15,29 @@
 :- use_module(library(uri)).
 
 :- discontiguous
-    websql:query_complexity/3,
-    websql:query_html_description//2,
-    websql:query_html_title//2,
-    websql:query_size/4,
-    websql:query_string/3.
+    ws:query_complexity/3,
+    ws:query_html_description//2,
+    ws:query_html_title//2,
+    ws:query_size/4,
+    ws:query_string/3.
 
 :- dynamic
-    websql:dataset_file/3,
-    websql:query_complexity/3,
-    websql:query_html_description//2,
-    websql:query_html_title//2,
-    websql:query_size/4,
-    websql:query_string/3.
+    ws:dataset_file/3,
+    ws:query_complexity/3,
+    ws:query_html_description//2,
+    ws:query_html_title//2,
+    ws:query_size/4,
+    ws:query_string/3.
 
 :- multifile
-    websql:dataset_file/3,
-    websql:query_complexity/3,
-    websql:query_html_description//2,
-    websql:query_html_title//2,
-    websql:query_size/4,
-    websql:query_string/3.
+    ws:dataset_file/3,
+    ws:query_complexity/3,
+    ws:query_html_description//2,
+    ws:query_html_title//2,
+    ws:query_size/4,
+    ws:query_string/3.
 
-websql:dataset_file("LUBM", NumUniversities, HdtFile) :-
+ws:dataset_file("LUBM", NumUniversities, HdtFile) :-
   atomic_list_concat(['LUBM',NumUniversities], -, Base),
   file_name_extension(Base, hdt, Local),
   (   absolute_file_name(
@@ -93,10 +93,10 @@ reserialize0(DirtyFile, CleanFile) :-
 
 % Q1 %
 
-websql:query_html_description("LUBM", "Q1") -->
+ws:query_html_description("LUBM", "Q1") -->
   html(p("This query bears large input and high selectivity.  It queries about just one class and one property and does not assume any hierarchy information or inference.")).
          
-websql:query_string("LUBM", "Q1", '\c
+ws:query_string("LUBM", "Q1", '\c
 prefix ub: <http://www.lehigh.edu/~zhp2/2004/0401/univ-bench.owl#>
 select ?x {
   ?x a ub:GraduateStudent ;
@@ -107,10 +107,10 @@ select ?x {
 
 % Q2 %
 
-websql:query_html_description("LUBM", "Q2") -->
+ws:query_html_description("LUBM", "Q2") -->
   html(p("This query increases in complexity: 3 classes and 3 properties are involved.  Additionally, there is a triangular pattern of relationships between the objects involved.")).
          
-websql:query_string("LUBM", "Q2", '\c
+ws:query_string("LUBM", "Q2", '\c
 prefix ub: <http://www.lehigh.edu/~zhp2/2004/0401/univ-bench.owl#>
 select ?x ?y ?z {
   ?x a ub:GraduateStudent ;
@@ -125,7 +125,7 @@ select ?x ?y ?z {
 
 % Q3 %
 
-websql:query_html_description("LUBM", "Q3") -->
+ws:query_html_description("LUBM", "Q3") -->
   html(
     p([
       "This query is similar to query LUBM1 but class ",
@@ -134,7 +134,7 @@ websql:query_html_description("LUBM", "Q3") -->
     ])
   ).
 
-websql:query_string("LUBM", "Q3", '\c
+ws:query_string("LUBM", "Q3", '\c
 prefix ub: <http://www.lehigh.edu/~zhp2/2004/0401/univ-bench.owl#>
 select ?x {
   ?x a ub:Publication ;
