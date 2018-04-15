@@ -18,6 +18,7 @@ ant -f build.xml
 
 * Generate a dataset
 
-#+BEGIN_SRC bash
-swipl script.pl -g run(1).
+#+BEGIN_SRC prolog
+./run.sh
+?- run(10).
 #+END_SRC
