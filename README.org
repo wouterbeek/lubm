@@ -1,4 +1,5 @@
-# Copy of the Lehigh University Benchmark (LUBM)
+#+TITLE: Copy of the Lehigh University Benchmark (LUBM)
+#+AUTHOR: Wouter Beek
 
 This is a copy of the benchmark published at
 http://swat.cse.lehigh.edu/projects/lubm/
@@ -7,15 +8,16 @@ This copy is cleaned to be compliant with SPARQL 1.1 syntax, has
 correct out-of-the-box behavior on Linux, and includes a SWI-Prolog
 based API for generating & querying datasets from this benchmark.
 
-## Build the Data Generator (UBA 1.7)
+* Build the Data Generator (UBA 1.7)
 
-```sh
-apt install ant
+#+BEGIN_SRC bash
+sudo apt install ant # Unbuntu
+sudo dnf install ant # Fedora
 ant -f build.xml
-```
+#+END_SRC
 
-## Generate a dataset
+* Generate a dataset
 
-```sh
-./run.sh
-```
+#+BEGIN_SRC bash
+swipl script.pl -g run(1).
+#+END_SRC
