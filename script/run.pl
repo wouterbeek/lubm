@@ -18,8 +18,8 @@
 %! run(NumberOfUniversities:nonneg) is det.
 
 run(N) :-
-  absolute_file_name('build/lubm.jar', JarFile, [access(read)]),
-  absolute_file_name('univ-bench.owl', SchemaFile, [access(read)]),
+  absolute_file_name('../build/lubm.jar', JarFile, [access(read)]),
+  absolute_file_name('../data/univ-bench.owl', SchemaFile, [access(read)]),
   setting(data_directory, Dir),
   process_create(
     path(java),

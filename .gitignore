@@ -1,4 +1,3 @@
 *~
 build/
-conf.json
-out/
+conf/conf.json
