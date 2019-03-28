@@ -8,32 +8,24 @@ This copy is cleaned to be compliant with SPARQL 1.1 syntax, has
 correct out-of-the-box behavior on Linux, and includes a SWI-Prolog
 based API for generating & querying datasets from this benchmark.
 
-* Prerequisites
-
-1. Install GNU zip.
-
-2. Install Ant:
-
-   #+begin_src sh
-   sudo apt install ant # Unbuntu
-   sudo dnf install ant # Fedora
-   #+end_src
-
 * Installation
 
-1. Clone this repository:
+1. Install [[https://ant.apache.org][Apache Ant]], [[https://www.gnu.org/software/gzip/][GNU zip]], and [[http://librdf.org/raptor/][Raptor]] (available in most package
+   managers).
+
+2. Clone this repository:
 
    #+begin_src sh
    git clone https://github.com/wouterbeek/lubm
    #+end_src
 
-2. Build with Ant:
+3. Build with Ant:
 
    #+begin_src sh
    cd lubm && ant -f build.xml
    #+end_src
 
-* Usages
+* Use
 
 Create a dataset:
 
