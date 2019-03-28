@@ -8,18 +8,35 @@ This copy is cleaned to be compliant with SPARQL 1.1 syntax, has
 correct out-of-the-box behavior on Linux, and includes a SWI-Prolog
 based API for generating & querying datasets from this benchmark.
 
-* Build the Data Generator (UBA 1.7)
+* Prerequisites
 
-#+BEGIN_SRC bash
-sudo apt install ant # Unbuntu
-sudo dnf install ant # Fedora
-ant -f build.xml
-#+END_SRC
+1. Install GNU zip.
 
-* Generate a dataset
+2. Install Ant:
 
-#+BEGIN_SRC prolog
-$ cd script
-$ ./run.sh
-?- run(10).
-#+END_SRC
+   #+begin_src sh
+   sudo apt install ant # Unbuntu
+   sudo dnf install ant # Fedora
+   #+end_src
+
+* Installation
+
+1. Clone this repository:
+
+   #+begin_src sh
+   git clone https://github.com/wouterbeek/lubm
+   #+end_src
+
+2. Build with Ant:
+
+   #+begin_src sh
+   cd lubm && ant -f build.xml
+   #+end_src
+
+* Usages
+
+Create a dataset:
+
+#+begin_src
+$ ./run.sh 1 out.nt.gz
+#+end_src
