@@ -5,6 +5,6 @@
 
 prefix ub: <http://www.lehigh.edu/~zhp2/2004/0401/univ-bench.owl#>
 select ?x {
-  ?x a ub:Publication ;
-    ub:publicationAuthor <http://www.Department0.University0.edu/AssistantProfessor0>
+  ?x a ub:Publication;
+    ub:publicationAuthor <http://www.Department0.University0.edu/AssistantProfessor0>.
 }

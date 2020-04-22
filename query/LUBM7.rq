@@ -6,8 +6,8 @@
 
 prefix ub: <http://www.lehigh.edu/~zhp2/2004/0401/univ-bench.owl#>
 select ?x ?y {
-  ?x a ub:Student ;
-    ub:takesCourse ?y .
-  ?y a ub:Course .
-  <http://www.Department0.University0.edu/AssociateProfessor0> ub:teacherOf ?y
+  ?x a ub:Student;
+    ub:takesCourse ?y.
+  ?y a ub:Course.
+  <http://www.Department0.University0.edu/AssociateProfessor0> ub:teacherOf ?y.
 }
